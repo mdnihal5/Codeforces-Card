@@ -1,33 +1,37 @@
-import React, { useEffect, useState } from "react";
-import ProfileCard from "./ProfileCard";
-import { set } from "react-hook-form";
-
-const getUser = async (user, setData) => {
-  console.log(user);
-  const queryUrl = `https://codeforces.com/api/user.info?handles=${user};Fefer_Ivan&checkHistoricHandles=false`;
-
-  const res = await fetch(queryUrl);
-  const data = await res.json();
-  if (data.status === "OK") {
-    console.log("success full");
-    setData(data.result[0]);
-  }
-};
+import { useContext, useEffect } from "react";
+import ProfileCard from "./components/ProfileCard";
+import UserContext from "./components/UserContext";
+import Start from "./components/Start";
+import HandlenotFound from "./components/HandlenotFound";
 const App = () => {
-  const [User, setUser] = useState("");
-  const [Data, setData] = useState(null);
-  const [user, setuser] = useState({
-    tier: "loading",
-    username: "loading",
-    avatar: <div className="w-[120px] skeleton"></div>,
-    contestRating: "loading",
-    friendsOf: "loading",
-    maxrating: "laoding",
-    contribution: "laoding",
-  });
+  const {
+    user,
+    setUser,
+    Data,
+    setData,
+    handleFound,
+    sethandleFound,
+    inputUser,
+    setInputUser,
+  } = useContext(UserContext);
+
+  const getUser = async (user) => {
+    if (user.length === 0) return;
+    const queryUrl = `https://codeforces.com/api/user.info?handles=${user};Fefer_Ivan&checkHistoricHandles=false`;
+
+    const res = await fetch(queryUrl);
+    const data = await res.json();
+    if (data.status === "OK") {
+      console.log("success full");
+      sethandleFound(1);
+      setData(data.result[0]);
+    } else {
+      sethandleFound(2);
+    }
+  };
   useEffect(() => {
-    if (Data)
-      setuser({
+    if (handleFound === 1 && Data !== null)
+      setUser({
         tier: Data.rank,
         avatar: Data.avatar,
         username: Data.handle,
@@ -40,26 +44,26 @@ const App = () => {
   return (
     <div className="App">
       <input
-        onChange={(e) => setUser(e.target.value)}
+        onChange={(e) => setInputUser(e.target.value)}
         type="text"
-        className="w-32 h=5 bg-gray-300 m-5"
+        placeholder="enter your codeforces handle"
+        className="w-[400px] h=5 input ml-[25%] bg-gray-300 m-5 text-center rounded-md"
       />
       <button
+        className="btn btn-sm  btn-primary"
         onClick={() => {
-          getUser(User, setData);
+          getUser(inputUser);
+          console.log(handleFound, Data, user);
         }}
       >
         submit
       </button>
-      {Data ? (
-        <>
-          <ProfileCard user={user} />
-          <button className="btn btn-primary" onClick={() => console.log(user)}>
-            Show
-          </button>
-        </>
+      {handleFound === 1 && user ? (
+        <ProfileCard user={user} />
+      ) : handleFound === 0 ? (
+        <Start />
       ) : (
-        <div className=" skeleton mx-auto my-8  w-[400px] h-[450px] "></div>
+        <HandlenotFound />
       )}
     </div>
   );
