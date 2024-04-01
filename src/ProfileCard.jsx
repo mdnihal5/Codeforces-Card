@@ -1,8 +1,5 @@
-import React, { useState, useRef } from "react";
-import html2canvas from "html2canvas-pro";
-import { FaLinkedin, FaGithub } from "react-icons/fa";
 import * as htmlToImage from "html-to-image";
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
+import { useRef, useState } from "react";
 const ProfileCard = (User) => {
   const user = User.user;
   const [bgColor, setbgColor] = useState("violet-200");
@@ -26,9 +23,6 @@ const ProfileCard = (User) => {
       console.error("Error capturing image:", error);
     }
   };
-
-  const url =
-    "https://userpic.codeforces.org/3332594/title/6e3ce0bb53e6ed79.jpg";
   return (
     <div className="w-[100vw] h-[100vh]" ref={cardRef}>
       <div
@@ -36,7 +30,7 @@ const ProfileCard = (User) => {
       >
         <div>
           <div className="w-[120px] border-solid m-auto  flex items-center jus my-4">
-            <img className="bg-cover rounded-lg" src={url} alt="logo" />
+            <img className="bg-cover rounded-lg" src={user.avatar} alt="logo" />
           </div>
           <div className=" font-bold grid">
             <h3 className=" text-cyan-500">{user.tier}</h3>
@@ -51,10 +45,6 @@ const ProfileCard = (User) => {
             <div className="w-[300px] flex gap-3">
               <label>Max Rating :</label>
               <h3 className=" text-cyan-500">{user.maxrating}</h3>
-            </div>
-            <div className="w-[300px] flex gap-3">
-              <label>Rank:</label>
-              <h3>{user.rank}</h3>
             </div>
             <div className="w-[300px] flex gap-3">
               <label>Contribution :</label>
