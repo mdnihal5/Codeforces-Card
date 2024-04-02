@@ -1,5 +1,6 @@
 import * as htmlToImage from "html-to-image";
 import { useContext, useRef, useState } from "react";
+import UserContext from "./UserContext";
 const getColor = (name) => {
   const map = new Map();
   map.set("unrated", "");
@@ -16,6 +17,8 @@ const getColor = (name) => {
 };
 const ProfileCard = (User) => {
   const user = User.user;
+  const { Theme, setTheme } = useContext(UserContext);
+
   const cardRef = useRef(null);
   const [imageUrl, setImageUrl] = useState();
   const handleDownloadImage = async () => {
@@ -38,7 +41,7 @@ const ProfileCard = (User) => {
 
   return (
     <div className="w-100vh flex items-center justify-center h-100vh">
-      <div className="w-[500px] h-[500px]" ref={cardRef}>
+      <div className="w-[455px] h-[500px]" ref={cardRef}>
         <div
           className={`shadow-lg shadow-indigo-500/60 profile-card grid justify-center h-[450px] w-[400px] rounded-2xl violet-200 mx-auto my-8`}
         >

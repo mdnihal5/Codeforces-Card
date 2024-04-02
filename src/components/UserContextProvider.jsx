@@ -1,7 +1,7 @@
 import React from "react";
 import UserContext from "./UserContext";
 const UserContextProvider = ({ children }) => {
-  const [Theme, setTheme] = React.useState(1);
+  const [Theme, setTheme] = React.useState("light");
   const [user, setUser] = React.useState(null);
   const [Data, setData] = React.useState(null);
   const [color, setColor] = React.useState("black");
@@ -12,8 +12,6 @@ const UserContextProvider = ({ children }) => {
       value={{
         user,
         setUser,
-        Theme,
-        setTheme,
         Data,
         setData,
         handleFound,
