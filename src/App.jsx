@@ -54,7 +54,6 @@ const App = () => {
           className="btn btn-sm  ml-8 mt-3  btn-primary"
           onClick={() => {
             getUser(inputUser);
-            console.log(handleFound, Data, user);
           }}
         >
           submit
