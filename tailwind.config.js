@@ -6,7 +6,7 @@ export default {
       colors: {
         transparent: "transparent",
         current: "currentColor",
-        newbie: "#ccccb3",
+        newbie: "#a6a6a6",
         unrated: "#0d0d0d",
         pupil: "#339933",
         specialist: "#33cccc",
