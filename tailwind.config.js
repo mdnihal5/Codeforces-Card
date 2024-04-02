@@ -2,8 +2,22 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        transparent: "transparent",
+        current: "currentColor",
+        newbie: "#ccccb3",
+        unrated: "#0d0d0d",
+        pupil: "#339933",
+        specialist: "#33cccc",
+        expert: "#0033cc",
+        candidate: "#e600ac",
+        master: "#ff9900",
+        grandmaster: "#cc0000",
+      },
+    },
   },
+
   plugins: [require("daisyui")],
   daisyui: {
     themes: false, // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]

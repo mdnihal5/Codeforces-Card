@@ -3,6 +3,18 @@ import ProfileCard from "./components/ProfileCard";
 import UserContext from "./components/UserContext";
 import Start from "./components/Start";
 import HandlenotFound from "./components/HandlenotFound";
+const rederColor = () => {
+  <>
+    <p className="bg-newbie text-newbie"></p>
+    <p className="bg-pupil text-pupil"></p>
+    <p className="bg-specialist text-specialist"></p>
+    <p className="bg-expert text-expert"></p>
+    <p className="bg-candidate text-candidate"></p>
+    <p className="bg-master text-master"></p>
+    <p className="bg-grandmaster text-grandmaster"></p>
+    <p className=" bg-unrated text-unrated"></p>
+  </>;
+};
 const App = () => {
   const {
     user,
