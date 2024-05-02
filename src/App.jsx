@@ -26,7 +26,6 @@ const App = () => {
     inputUser,
     setInputUser,
   } = useContext(UserContext);
-
   const getUser = async (user) => {
     if (user.length === 0) return;
     const queryUrl = `https://codeforces.com/api/user.info?handles=${user};`;
@@ -53,6 +52,15 @@ const App = () => {
         contribution: Data.contribution,
       });
   }, [Data]);
+  document.getElementById("Input").addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("Button").click();
+  }
+}); 
   return (
     <div className="App">
       <div className="m-auto flex item-center justify-center">
@@ -63,6 +71,7 @@ const App = () => {
           className="sm:w-[300px] lg:w-[300px] h=5  my-3 input  bg-gray-300 text-center rounded-md"
         />
         <button
+          id="Button"
           className="btn btn-sm  ml-8 mt-3  btn-primary"
           onClick={() => {
             getUser(inputUser);
